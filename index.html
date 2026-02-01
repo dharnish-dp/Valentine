@@ -46,7 +46,14 @@
       border: none;
       border-radius: 30px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, background 0.3s ease;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-focus-ring-color: transparent;
+    }
+
+    button:focus {
+      box-shadow: none;
     }
 
     #yesBtn {
@@ -57,6 +64,11 @@
     #yesBtn:hover {
       background: #d62828;
       transform: scale(1.1);
+    }
+
+    #yesBtn:active {
+      transform: scale(0.95);
+      opacity: 0.9;
     }
 
     #noBtn {
@@ -70,6 +82,11 @@
       background: #ffccd5;
     }
 
+    #noBtn:active {
+      transform: scale(0.95);
+      opacity: 0.9;
+    }
+
     /* Heart rain animation */
     .heartRain {
       position: fixed;
@@ -77,6 +94,7 @@
       font-size: 2rem;
       color: #e63946;
       animation: fall 4s linear forwards;
+      pointer-events: none;
     }
 
     @keyframes fall {
