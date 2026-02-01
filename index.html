@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valentine's Day</title>
+  <title>Valentine's Day App</title>
   <style>
     body {
       margin: 0;
@@ -19,7 +19,7 @@
 
     .container {
       text-align: center;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
       padding: 30px;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -49,7 +49,10 @@
       transition: transform 0.3s ease, background 0.3s ease;
       outline: none;
       -webkit-tap-highlight-color: transparent;
-      -webkit-focus-ring-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
     }
 
     button:focus {
@@ -104,9 +107,34 @@
       }
     }
 
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: red;
+      animation: confettiFall 3s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes confettiFall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
     /* Celebration view */
     .celebration {
-      background: radial-gradient(circle at center, #ffdde1, #ee9ca7);
+      background: linear-gradient(-45deg, #ffdde1, #ee9ca7, #fad0c4, #fbc2eb);
+      background-size: 400% 400%;
+      animation: gradientMove 8s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .celebration h1 {
@@ -134,11 +162,14 @@
 
     @media (max-width: 600px) {
       h1 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+      }
+      .message {
+        font-size: 1rem;
       }
       button {
-        font-size: 0.9rem;
-        padding: 10px 20px;
+        font-size: 1rem;
+        padding: 12px 25px;
       }
     }
   </style>
@@ -186,6 +217,20 @@
         setTimeout(() => {
           heart.remove();
         }, 4000);
+      }
+
+      // Confetti burst
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.top = '-10px';
+        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 3000);
       }
     });
   </script>
